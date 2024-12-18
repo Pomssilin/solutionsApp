@@ -21,7 +21,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                // Commande pour exécuter les tests (exemple : mvn test ou npm test)
+                dir('TestProject1') { // Changer de répertoire pour Project1
+                    bat 'dotnet test --configuration Release'
+                }
             }
         }
         stage('Deploy') {
