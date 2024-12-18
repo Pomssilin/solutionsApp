@@ -2,10 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout Code') {
             steps {
-                echo 'Building...'
-                // Commande pour compiler votre projet (exemple : mvn package ou npm build)
+                // Récupérer le code depuis GitHub
+                git 'https://github.com/Pomssilin/solutionsApp.git'
+            }
+        }
+
+        stage('Build Project1') {
+            steps {
+                // Compiler Project1
+                echo "Building Project1..."
+                dir('TestProject1') { // Changer de répertoire pour Project1
+                    sh 'dotnet build --configuration Release'
+                }
             }
         }
         stage('Test') {
