@@ -26,10 +26,15 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Dockerize') {
             steps {
-                echo 'Deploying...'
-                // Commande pour déployer le projet (exemple : copie des fichiers ou appel API)
+                script {
+                    // Construire l'image Docker
+                    bat '''
+                    docker build -t solutionsapp:latest .
+                    docker run -p 8080:8080 solutionsapp
+                    '''
+                }
             }
         }
     }
